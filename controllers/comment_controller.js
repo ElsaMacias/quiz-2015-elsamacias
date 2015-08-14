@@ -14,19 +14,21 @@ exports.create = function(req, res) {
                 );
 
 
-var errors = comment.validate(); 
 
-if (errors) {
-  var i=0;
-  var errores= new Array(); //se convierte en [] con la propiedad message por compatibilida con layout
 
-  for (var prop in errors) errores[i++]= { message: errors[prop] };
+  var errors = comment.validate(); //ya que el objeto errors no tiene then(
 
-  res.render('comments/new.ejs', {comment: comment, errors: err.errors});
+  if (errors) {
+    var i=0;
+    var errores= new Array(); //se convierte en [] con la propiedad message por compatibilida con layout
 
-} else {
-    comment  // save: guarda en DB campos pregunta, respuesta y tema de quiz
-      .save()
-      .then( function(){ res.redirect('/quizes/'+req.params.quizId)}); // res.redirect: Redirección HTTP a lista de preguntas
-  }
+    for (var prop in errors) errores[i++]= { message: errors[prop] };
+
+    res.render('comments/new.ejs', {comment: comment, errors: err.errors});
+
+  } else {
+      comment  // save: guarda en DB campos pregunta, respuesta y tema de quiz
+        .save()
+        .then( function(){ res.redirect('/quizes/'+req.params.quizId)}); // res.redirect: Redirección HTTP a lista de preguntas
+    }
 };
