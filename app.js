@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+//holaaaa
 //Renderizar el layout.ejs y completar las vistas.
 var partials = require('express-partials');
 
